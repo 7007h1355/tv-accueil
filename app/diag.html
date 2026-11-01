@@ -4,7 +4,7 @@
 </head><body><div id="o"></div>
 <script>
 var o = document.getElementById('o');
-function log(s){ o.textContent += s + '\n'; }
+function log(s){ o.textContent += s + '\n'; try { fetch('http://192.168.1.176:8765/log', {method:'POST', mode:'no-cors', body: s}); } catch(e){} }
 log('UA ' + navigator.userAgent);
 log('size ' + innerWidth + 'x' + innerHeight + ' dpr ' + devicePixelRatio);
 log('tizen ' + typeof tizen + ' webapis ' + typeof webapis);
