@@ -1,0 +1,10 @@
+{
+  "name": "tv-launcher",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Panneau de démarrage : trou noir + raccourcis",
+  "packageType": "app",
+  "appName": "Accueil",
+  "appPath": "app/diag.html",
+  "keys": ["ColorF0Red", "ColorF1Green", "ColorF2Yellow", "ColorF3Blue"]
+}
