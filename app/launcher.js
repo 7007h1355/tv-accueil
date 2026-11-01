@@ -3,7 +3,10 @@ const nav = document.getElementById('tiles');
 const els = TILES.map((t) => {
   const d = document.createElement('div');
   d.className = 'tile';
-  d.textContent = t.label;
+  d.style.setProperty('--glow', t.glow);
+  d.innerHTML = '<div class="icon">' + t.icon + '</div><div><div class="label"></div><div class="sub"></div></div>';
+  d.querySelector('.label').textContent = t.label;
+  d.querySelector('.sub').textContent = t.sub;
   nav.appendChild(d);
   return d;
 });
