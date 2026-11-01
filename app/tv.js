@@ -5,7 +5,7 @@ const modules = new Promise((resolve) => {
   tb = new WebSocket('ws://localhost:8081');
   tb.onopen = () => {
     // le panneau se déclare module de démarrage de TizenBrew
-    tb.send(JSON.stringify({ type: 10, payload: { action: 'autolaunch', module: 'gh/7007h1355/tv-launcher@main' } }));
+    tb.send(JSON.stringify({ type: 10, payload: { action: 'autolaunch', module: 'gh/7007h1355/tv-accueil' } }));
     tb.send(JSON.stringify({ type: 4, payload: null }));
   };
   tb.onmessage = (m) => {
