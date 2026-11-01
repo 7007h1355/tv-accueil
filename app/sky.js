@@ -1,6 +1,7 @@
-// Couche WebGL : étoiles proches en parallaxe + poussière qui spirale vers le trou.
-// HOLE = position du trou dans la vidéo (fractions de l'écran).
-const HOLE = { x: 0.62, y: 0.42 };
+// Couche WebGL : étoiles proches en parallaxe + poussière qui spirale vers le trou, par-dessus la vidéo.
+// HOLE = le trou de la vidéo (render/blackhole.py : centre 0.56, 0.56 depuis le bas -> 0.44 depuis le haut,
+// disque vu presque de profil, inclinaison 0.17 rad, roulis 0.18 rad).
+const HOLE = { x: 0.56, y: 0.44 };
 
 (function () {
   const canvas = document.getElementById('sky');
@@ -22,15 +23,17 @@ const HOLE = { x: 0.62, y: 0.42 };
     vec2 pos;
     if (p.w > 0.5) {
       float life = fract(t * 0.02 * p.z + p.x);
-      float r = mix(0.55, 0.02, life * life);
-      float ang = p.y + life * 9.0 / (r + 0.15);
-      pos = hole + vec2(cos(ang) * r * 0.5625, sin(ang) * r * 0.32);
-      a = smoothstep(0.0, 0.15, life) * (1.0 - smoothstep(0.85, 1.0, life)) * 0.55;
-      gl_PointSize = 2.5;
+      float r = mix(0.33, 0.07, life * life);                 // du bord du disque à son bord intérieur (fraction de largeur)
+      float ang = p.y + life * 7.0 / (r * 4.0 + 0.3);
+      vec2 e = vec2(cos(ang) * r, sin(ang) * r * 0.17 * 1.7778); // ellipse du disque, en fractions d'écran
+      e = vec2(e.x * 0.9838 + e.y * 0.1790, -e.x * 0.1790 + e.y * 0.9838);   // roulis
+      pos = hole + e;
+      a = smoothstep(0.0, 0.2, life) * (1.0 - smoothstep(0.8, 1.0, life)) * 0.35;
+      gl_PointSize = 2.0;
     } else {
       pos = vec2(fract(p.x + t * 0.0015 * p.z), fract(p.y / 6.2832));
-      a = 0.35 + 0.65 * fract(sin(p.y * 91.7) * 4375.8) * (0.6 + 0.4 * sin(t * p.z * 2.0 + p.y * 40.0));
-      gl_PointSize = 1.0 + 2.0 * p.z;
+      a = (0.1 + 0.3 * fract(sin(p.y * 91.7) * 4375.8)) * (0.6 + 0.4 * sin(t * p.z * 2.0 + p.y * 40.0));
+      gl_PointSize = 1.0 + 1.5 * p.z;
     }
     gl_Position = vec4(pos * 2.0 - 1.0, 0.0, 1.0);
     gl_Position.y *= -1.0;

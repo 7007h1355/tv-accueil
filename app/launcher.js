@@ -44,4 +44,10 @@ document.addEventListener('keydown', (e) => {
 });
 setInterval(paint, 500);
 paint();
+// le fond : la vidéo vient de GitHub Pages (même dépôt) ; en local, du dossier media/
+const bg = document.getElementById('bg');
+bg.src = location.hostname === '127.0.0.1' ? 'https://7007h1355.github.io/tv-accueil/media/sky.mp4' : '../media/sky.mp4';
+bg.addEventListener('playing', () => report('vidéo lue'), { once: true });
+bg.addEventListener('error', () => { report('vidéo erreur ' + (bg.error && bg.error.code)); bg.remove(); });
+
 report('launcher prêt');
