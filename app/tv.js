@@ -3,7 +3,11 @@
 let tb = null;
 const modules = new Promise((resolve) => {
   tb = new WebSocket('ws://localhost:8081');
-  tb.onopen = () => tb.send(JSON.stringify({ type: 4, payload: null }));
+  tb.onopen = () => {
+    // le panneau se déclare module de démarrage de TizenBrew
+    tb.send(JSON.stringify({ type: 10, payload: { action: 'autolaunch', module: 'gh/7007h1355/tv-launcher' } }));
+    tb.send(JSON.stringify({ type: 4, payload: null }));
+  };
   tb.onmessage = (m) => {
     const d = JSON.parse(m.data);
     if (d.type === 4) resolve(d.payload);
