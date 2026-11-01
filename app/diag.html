@@ -1,26 +1,3 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><title>diag</title>
-<style>body{background:#000;color:#0f0;font:22px monospace;padding:40px;white-space:pre-wrap}</style>
-</head><body><div id="o"></div>
-<script>
-var o = document.getElementById('o');
-function log(s){ o.textContent += s + '\n'; try { fetch('http://192.168.1.176:8765/log', {method:'POST', mode:'no-cors', body: s}); } catch(e){} }
-log('UA ' + navigator.userAgent);
-log('size ' + innerWidth + 'x' + innerHeight + ' dpr ' + devicePixelRatio);
-log('tizen ' + typeof tizen + ' webapis ' + typeof webapis);
-try { log('tvwindow ' + typeof tizen.tvwindow + ' inputdevice ' + typeof tizen.tvinputdevice); } catch(e){ log('tizen err ' + e.message); }
-var gl = document.createElement('canvas').getContext('webgl');
-log('webgl ' + !!gl + (gl ? ' ' + gl.getParameter(gl.RENDERER) : ''));
-var v = document.createElement('video');
-log('hevc ' + v.canPlayType('video/mp4; codecs="hvc1"') + ' h264 ' + v.canPlayType('video/mp4; codecs="avc1.640033"'));
-var ws = new WebSocket('ws://localhost:8081');
-ws.onopen = function(){ log('tb ws open'); ws.send(JSON.stringify({type:4, payload:null})); };
-ws.onerror = function(){ log('tb ws ERROR'); };
-ws.onmessage = function(m){ var d = JSON.parse(m.data); if (d.type === 4) d.payload.forEach(function(x){ log('module ' + x.fullName + ' ' + x.packageType + ' ' + x.appPath); }); else log('tb msg ' + d.type); };
-var r = new WebSocket('ws://127.0.0.1:8001/api/v2/channels/samsung.remote.control?name=' + btoa('Accueil'));
-r.onopen = function(){ log('remote 8001 open'); };
-r.onmessage = function(m){ log('remote ' + m.data.slice(0, 120)); };
-r.onerror = function(){ log('remote 8001 ERROR'); };
-fetch('http://127.0.0.1:8001/api/v2/').then(function(x){ return x.text(); }).then(function(t){ log('rest ok ' + t.length); }, function(e){ log('rest ERR ' + e); });
-document.addEventListener('keydown', function(e){ log('key ' + e.keyCode + ' ' + e.key); });
-</script></body></html>
+<meta charset="utf-8">
+<script>location.replace('index.html');</script>
