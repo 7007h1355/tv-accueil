@@ -155,7 +155,7 @@ test('ok renvoie la tuile active', () => {
 
 - [ ] **Step 2: Lancer, voir l'échec**
 
-Run: `node --test test/` — Expected: FAIL `Cannot find module '../app/focus.js'`.
+Run: `node --test 'test/*.test.js'` — Expected: FAIL `Cannot find module '../app/focus.js'`.
 
 - [ ] **Step 3: Implémentation**
 
@@ -182,7 +182,7 @@ export function createFocus(count, idleMs) {
 
 - [ ] **Step 4: Tests verts**
 
-Run: `node --test test/` — Expected: 3 pass (ESM grâce à `"type": "module"` du `package.json` racine ; TizenBrew ignore ce champ).
+Run: `node --test 'test/*.test.js'` — Expected: 3 pass (ESM grâce à `"type": "module"` du `package.json` racine ; TizenBrew ignore ce champ).
 
 - [ ] **Step 5: Commit**
 
