@@ -1,5 +1,4 @@
 // Tout ce qui parle à la TV. Le reste de l'appli ne touche ni WebSocket ni API TV.
-import { report } from './debug.js';
 
 let tb = null;
 const modules = new Promise((resolve) => {
@@ -20,7 +19,7 @@ function remoteSocket() {
   return remote;
 }
 
-export async function launchModule(fullName) {
+async function launchModule(fullName) {
   const list = await modules;
   const mdl = list.find((m) => m.fullName === fullName);
   if (!mdl) throw new Error('module absent');
@@ -28,7 +27,7 @@ export async function launchModule(fullName) {
   if (!mdl.evaluateScriptOnDocumentStart) location.href = mdl.appPath;
 }
 
-export function sendKey(key) {
+function sendKey(key) {
   const ws = remoteSocket();
   const msg = JSON.stringify({
     method: 'ms.remote.control',
@@ -42,7 +41,7 @@ export function sendKey(key) {
   });
 }
 
-export function run(action) {
+function run(action) {
   if (action.kind === 'module') return launchModule(action.name);
   if (action.kind === 'key') return sendKey(action.key);
 }

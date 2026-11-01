@@ -1,5 +1,5 @@
 // Focus des tuiles et mise en veille : logique pure, l'heure est passée en argument.
-export function createFocus(count, idleMs, start = 0) {
+function createFocus(count, idleMs, start = 0) {
   let last = start;
   const f = {
     index: 0,

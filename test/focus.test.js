@@ -1,6 +1,13 @@
-import { test } from 'node:test';
-import assert from 'node:assert/strict';
-import { createFocus } from '../app/focus.js';
+// app/ est en scripts classiques (le proxy TizenBrew ne sert pas de type MIME) :
+// on charge focus.js dans un contexte vm et on récupère la fonction globale.
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const { readFileSync } = require('node:fs');
+const vm = require('node:vm');
+
+const ctx = {};
+vm.runInNewContext(readFileSync(__dirname + '/../app/focus.js', 'utf8') + '\nthis.createFocus = createFocus;', ctx);
+const { createFocus } = ctx;
 
 test('gauche/droite bornés', () => {
   const f = createFocus(3, 10000);

@@ -1,7 +1,3 @@
-import { report } from './debug.js';
-import { TILES } from './tiles.js';
-import { createFocus } from './focus.js';
-import { run } from './tv.js';
 
 const nav = document.getElementById('tiles');
 const els = TILES.map((t) => {

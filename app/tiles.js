@@ -1,4 +1,4 @@
-export const TILES = [
+const TILES = [
   { id: 'youtube', label: 'YouTube', action: { kind: 'module', name: 'npm/@foxreis/tizentube' } },
   { id: 'hdmi1', label: 'HDMI 1', action: { kind: 'key', key: 'KEY_HDMI1' } },
   { id: 'hdmi2', label: 'HDMI 2', action: { kind: 'key', key: 'KEY_HDMI2' } },

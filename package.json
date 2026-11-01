@@ -1,7 +1,6 @@
 {
   "name": "tv-launcher",
   "version": "0.1.0",
-  "type": "module",
   "description": "Panneau de démarrage : trou noir + raccourcis",
   "packageType": "app",
   "appName": "Accueil",
